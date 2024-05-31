@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import  string  from "vite-plugin-string";
 import react from "@vitejs/plugin-react";
 import * as path from "path";
 
@@ -7,11 +6,8 @@ import * as path from "path";
 export default defineConfig({
   plugins: [
     react(),
-    string({
-      include: "**/*.txt",
-    }),
   ],
-  base: "/wordle-app/",
+  base: "/wordle-game/",
   ...(process.env.NODE_ENV === "development"
     ? {
         define: {
