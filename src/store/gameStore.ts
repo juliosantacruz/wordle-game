@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
-// import wordsList from "@/mock/wordsList.json";
+import wordsList from "@/mock/wordsList.json";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 
@@ -56,7 +56,7 @@ export const useGameStore = create<Store>()((set, get) => ({
     })),
 
   // Game State
-  word: "ferrocarrils",
+  word: "",
   guessArray: ["", "", "", "", ""],
   currentGuess: 0,
   gamesWon: 0,
@@ -142,7 +142,7 @@ export const useGameStore = create<Store>()((set, get) => ({
   gameInit: () =>
 
     set(() => ({
-      // word: wordsList [Math.round(Math.random() * wordsList.length)],
+      word: wordsList [Math.round(Math.random() * wordsList.length)],
       guessArray: ["", "", "", "", ""],
       currentGuess: 0,
       lostGame: false,

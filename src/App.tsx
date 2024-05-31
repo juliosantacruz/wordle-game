@@ -25,6 +25,7 @@ function App() {
     return () => {
       window.removeEventListener("keydown", handleKeyup);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

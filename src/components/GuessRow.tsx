@@ -7,8 +7,7 @@ type Props = {
 };
 
 export default function GuessRow({ guess, word, isGuessed }: Props) {
-  const numCol = `grid-cols-${word.length}`
-  console.log(numCol)
+
   return (
     <div className={`mb-4 grid grid-flow-col-dense gap-4 w-full`}>
       {new Array(word.length).fill(0).map((char, i) => {
