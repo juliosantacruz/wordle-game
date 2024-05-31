@@ -11,7 +11,7 @@ export default defineConfig({
       include: "**/*.txt",
     }),
   ],
-
+  base: "/wordle-app/",
   ...(process.env.NODE_ENV === "development"
     ? {
         define: {
