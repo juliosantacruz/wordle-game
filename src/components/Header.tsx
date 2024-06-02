@@ -34,19 +34,19 @@ export default function Header({darkMode, setDarkMode }:Props) {
     }
   },[darkMode])
   return (
-    <nav className="flex items-center justify-between w-[638px] h-[84px] mb-6 rounded-[15px] bg-[#F3F3F3] dark:bg-gray-800 p-4 ">
+    <nav className="flex items-center justify-between w-full max-w-[638px] h-[84px] mb-2 rounded-[15px] bg-[#F3F3F3] dark:bg-gray-800 p-4 ">
       <div>
         <button onClick={showTheRules}>
           {" "}
           <img
             src={darkMode ? darkQuestion : lightQuestion}
-            className="h-[32px]"
+            className="h-[22px]"
             alt="Question Icon"
           />
         </button>
       </div>
 
-      <div className="text-6xl font-bold uppercase font text-[#202537] dark:text-[#DADCE0]">wordle</div>
+      <div className="text-2xl font-bold uppercase font text-[#202537] dark:text-[#DADCE0]">wordle</div>
 
       <div>
         <div className="flex items-center gap-4">
@@ -54,7 +54,7 @@ export default function Header({darkMode, setDarkMode }:Props) {
             {" "}
             <img
               src={darkMode ? darkChart : lightChart}
-              className="h-[32px]"
+              className="h-[22px]"
               alt="Chart Icon"
             />
           </button>
@@ -62,7 +62,7 @@ export default function Header({darkMode, setDarkMode }:Props) {
             {" "}
             <img
               src={darkMode ? darkIcon : lightIcon}
-              className="h-[32px]"
+              className="h-[22px]"
               alt="IconDarkMode"
             />
           </button>

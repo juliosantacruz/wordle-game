@@ -9,7 +9,7 @@ type Props = {
 export default function GuessRow({ guess, word, isGuessed }: Props) {
 
   return (
-    <div className={`mb-4 grid grid-flow-col-dense gap-4 w-full`}>
+    <div className={`mb-2 grid grid-flow-col-dense gap-2 w-full`}>
       {new Array(word.length).fill(0).map((char, i) => {
         const bgColor = !isGuessed
           ? "bg-[#939B9F33]"
@@ -22,7 +22,7 @@ export default function GuessRow({ guess, word, isGuessed }: Props) {
         return (
           <div
             key={"char" + guess[i] + i}
-            className={` size-20 rounded-md ${bgColor} font-bold uppercase text-white flex justify-center items-center text-4xl`}
+            className={` size-14 rounded-md ${bgColor} font-bold uppercase text-white flex justify-center items-center text-4xl`}
           >
             {guess[i]}
           </div>
