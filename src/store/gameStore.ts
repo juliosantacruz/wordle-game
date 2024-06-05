@@ -32,6 +32,7 @@ type Store = {
     setInexactGuesses: () => void;
     exactGuesses: string[];
     setExactGuesses: () => void;
+    resetKeyboard:()=>void;
   };
 
   gameInit: () => void;
@@ -138,15 +139,33 @@ export const useGameStore = create<Store>()((set, get) => ({
         },
       }));
     },
+    resetKeyboard:()=>{
+      set((state)=>({
+        ...state,
+        keypadGuess: {
+          ...state.keypadGuess,
+          allGuesses: [""],
+          inexactGuesses: [""],
+          exactGuesses: [''],
+        },
+      }))
+    }
   },
   gameInit: () =>
 
-    set(() => ({
+    set((state) => ({
+      ...state,
       word: wordsList [Math.round(Math.random() * wordsList.length)],
       guessArray: ["", "", "", "", ""],
       currentGuess: 0,
       lostGame: false,
       winGame: false,
+      keypadGuess: {
+        ...state.keypadGuess,
+        allGuesses: [""],
+        inexactGuesses: [""],
+        exactGuesses: [''],
+      },
     })),
   submitGuess: () => {
     console.log(

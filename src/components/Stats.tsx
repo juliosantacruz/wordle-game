@@ -10,7 +10,7 @@ const formatTime = (seconds:number) => {
 
 export default function Stats() {
   const { setStats, gamesWon, gamesPlayed, word, lostGame, winGame, gameInit } = useGameStore();
-
+  const leTimer = false
   const minutesTimer=5
   const secondsTimer = 60 * minutesTimer
   const [timer, setTimer] = useState(secondsTimer);
@@ -18,7 +18,7 @@ export default function Stats() {
 
   useEffect(() => {
     let interval:string|number|NodeJS.Timeout;
-    if (lostGame || winGame) {
+    if (leTimer&&lostGame || leTimer&&winGame) {
       setIsButtonDisabled(true);
       setTimer(300); // Reinicia el temporizador a 5 minutos
       interval = setInterval(() => {

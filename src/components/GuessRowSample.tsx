@@ -21,7 +21,7 @@ export default function GuessRowSample({guess, word, isGuessed, test,className}:
           :'bg-[#fff] border border-[#000000] dark:bg-[#262B3C] dark:border-[#939B9F] '
 
 
-          return (<div key={'char'+guess[i]+i} className={` size-20 rounded-md ${bgColor} font-bold uppercase text-black dark:text-[#fff] flex justify-center items-center text-4xl`}>{guess[i]}</div>)
+          return (<div key={'char'+guess[i]+i} className={` sm:size-10 lg:size-20 rounded-md ${bgColor} font-bold uppercase text-black dark:text-[#fff] flex justify-center items-center text-4xl`}>{guess[i]}</div>)
         })
       }
     </div>

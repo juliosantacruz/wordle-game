@@ -34,10 +34,9 @@ export default function Header({darkMode, setDarkMode }:Props) {
     }
   },[darkMode])
   return (
-    <nav className="flex items-center justify-between w-full max-w-[638px] h-[84px] mb-2 rounded-[15px] bg-[#F3F3F3] dark:bg-gray-800 p-4 ">
-      <div>
+    <nav className="flex items-center justify-between w-full max-w-[638px] sm:h-[64px] md:h-[74px] mb-2 rounded-[15px] bg-[#F3F3F3] dark:bg-gray-800 p-4 ">
+      <div className="w-[70px]">
         <button onClick={showTheRules}>
-          {" "}
           <img
             src={darkMode ? darkQuestion : lightQuestion}
             className="h-[22px]"
@@ -46,10 +45,10 @@ export default function Header({darkMode, setDarkMode }:Props) {
         </button>
       </div>
 
-      <div className="text-2xl font-bold uppercase font text-[#202537] dark:text-[#DADCE0]">wordle</div>
+      <div className="sm:text-xl md:text-2xl lg:sm:text-4xl  font-bold uppercase font text-[#202537] dark:text-[#DADCE0] ">wordle</div>
 
-      <div>
-        <div className="flex items-center gap-4">
+      <div className="w-[70px]">
+        <div className="flex items-center gap-2 ">
           <button onClick={showStats}>
             {" "}
             <img
