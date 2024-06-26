@@ -30,7 +30,7 @@ function App() {
 
   return (
     <>
-      <div className=" h-screen w-screen flex flex-col items-center justify-between bg-[#F9F9F9] dark:bg-[#262B3C]">
+      <div className="max-w-[520px] h-screen w-screen mx-auto flex flex-col items-center justify-between bg-[#F9F9F9] dark:bg-[#262B3C]">
         <Header darkMode={darkMode} setDarkMode={setDarkMode} />
         <div className="w-full flex flex-col items-center my-[50px] px-2   ">
           {guessesArray.map((_, index) => {
