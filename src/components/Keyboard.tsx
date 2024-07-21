@@ -28,9 +28,9 @@ export default function Keyboard({ darkMode }: Props) {
   return (
     <div className="flex flex-col gap-4 max-w-[638px] w-full bg-[#dadce04d] dark:bg-[#dadce008] p-5 rounded-lg">
       {keys &&
-        keys.map((row) => {
+        keys.map((row, index) => {
           return (
-            <div className="flex flex-row justify-center gap-1">
+            <div key={index} className="flex flex-row justify-center gap-1">
               {row.map((key) => {
                 const bgColor = exactos.includes(key)
                   ? "bg-[#6AAA64] text-white"

@@ -1,13 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
-import wordsList from "@/mock/wordsList.json";
+// import wordsList from "@/mock/wordsList.json";
 import { createJSONStorage, persist } from "zustand/middleware";
-
-
+import { getWordList } from "@/api/wordList";
+type WordData={
+  word:string,
+  description:string,
+  url:string,
+  image:string,
+  category:string
+}
 type UxStore = {
   isFirstTime: boolean;
   setIsFirstTime: () => void;
-
 };
 type Store = {
   theRules: boolean;
@@ -15,6 +20,9 @@ type Store = {
   stats: boolean;
   setStats: (value: boolean) => void;
 
+  wordsList: any[];
+  wordData:WordData;
+  isLoading: boolean;
   word: string;
   guessArray: string[];
   currentGuess: number;
@@ -32,10 +40,11 @@ type Store = {
     setInexactGuesses: () => void;
     exactGuesses: string[];
     setExactGuesses: () => void;
-    resetKeyboard:()=>void;
+    resetKeyboard: () => void;
   };
 
   gameInit: () => void;
+  fetchData: () => void;
   submitGuess: () => void;
 
   handleKeyup: (e: KeyboardEvent) => void;
@@ -56,8 +65,31 @@ export const useGameStore = create<Store>()((set, get) => ({
       stats: value,
     })),
 
+  fetchData: async () => {
+    set({ isLoading: true });
+
+    try {
+      const data = await getWordList();
+      set((state) => ({
+        ...state,
+        wordsList: data,
+        wordData:state.wordsList[Math.round(Math.random() * state.wordsList.length)],
+
+      }));
+    } catch (error) {
+      console.error(error);
+    } finally {
+      set({ isLoading: false });
+      get().gameInit()
+    }
+  },
+
   // Game State
+  wordsList: [],
+  isLoading: false,
+  wordData:undefined,
   word: "",
+
   guessArray: ["", "", "", "", ""],
   currentGuess: 0,
   gamesWon: 0,
@@ -139,23 +171,22 @@ export const useGameStore = create<Store>()((set, get) => ({
         },
       }));
     },
-    resetKeyboard:()=>{
-      set((state)=>({
+    resetKeyboard: () => {
+      set((state) => ({
         ...state,
         keypadGuess: {
           ...state.keypadGuess,
           allGuesses: [""],
           inexactGuesses: [""],
-          exactGuesses: [''],
+          exactGuesses: [""],
         },
-      }))
-    }
+      }));
+    },
   },
   gameInit: () =>
-
     set((state) => ({
       ...state,
-      word: wordsList [Math.round(Math.random() * wordsList.length)],
+      word: state.wordData.word.toLowerCase(),
       guessArray: ["", "", "", "", ""],
       currentGuess: 0,
       lostGame: false,
@@ -164,13 +195,11 @@ export const useGameStore = create<Store>()((set, get) => ({
         ...state.keypadGuess,
         allGuesses: [""],
         inexactGuesses: [""],
-        exactGuesses: [''],
+        exactGuesses: [""],
       },
     })),
   submitGuess: () => {
-    console.log(
-      "submit"
-    );
+    console.log("submit");
     if (get().guessArray[get().currentGuess].length === get().word.length) {
       get().keypadGuess.setAllGuesses();
       get().keypadGuess.setInexactGuesses();
@@ -230,9 +259,6 @@ export const useWordleStore = create<UxStore>()(
           ...state,
           isFirstTime: false,
         })),
-
-
-
     }),
     {
       name: "wordleUX",
