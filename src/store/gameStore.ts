@@ -3,13 +3,13 @@ import { create } from "zustand";
 // import wordsList from "@/mock/wordsList.json";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { getWordList } from "@/api/wordList";
-type WordData={
-  word:string,
-  description:string,
-  url:string,
-  image:string,
-  category:string
-}
+type WordData = {
+  word: string;
+  description: string;
+  url: string;
+  image: string;
+  category: string;
+};
 type UxStore = {
   isFirstTime: boolean;
   setIsFirstTime: () => void;
@@ -21,7 +21,7 @@ type Store = {
   setStats: (value: boolean) => void;
 
   wordsList: any[];
-  wordData:WordData;
+  wordData: WordData;
   isLoading: boolean;
   word: string;
   guessArray: string[];
@@ -73,21 +73,21 @@ export const useGameStore = create<Store>()((set, get) => ({
       set((state) => ({
         ...state,
         wordsList: data,
-        wordData:state.wordsList[Math.round(Math.random() * state.wordsList.length)],
-
+        wordData:
+        data[Math.round(Math.random() * data.length)],
       }));
     } catch (error) {
       console.error(error);
     } finally {
       set({ isLoading: false });
-      get().gameInit()
+      get().gameInit();
     }
   },
 
   // Game State
   wordsList: [],
   isLoading: false,
-  wordData:undefined,
+  wordData: undefined,
   word: "",
 
   guessArray: ["", "", "", "", ""],

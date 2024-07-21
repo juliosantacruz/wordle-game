@@ -10,7 +10,7 @@ import AsideModal from "./components/AsideModal";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const { theRules, stats, gameInit, handleKeyup, fetchData, isLoading } =
+  const { theRules, stats,  handleKeyup, fetchData } =
     useGameStore();
   const { isFirstTime } = useWordleStore();
 
@@ -32,10 +32,9 @@ function App() {
   }, []);
 
 
-  console.log(isLoading);
 
   return (
-    <>
+
 
         <>
           <div className="max-w-[520px] h-screen w-screen mx-auto flex flex-col items-center justify-between bg-[#F9F9F9] dark:bg-[#262B3C]">
@@ -66,7 +65,7 @@ function App() {
           {stats ? <AsideModal children={<Stats />} openModal={stats} /> : null}
         </>
 
-    </>
+
   );
 }
 
