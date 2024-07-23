@@ -19,7 +19,7 @@ function App() {
   const currenGuess = useGameStore((state) => state.currentGuess);
 
   const isDev = import.meta.env.VITE_IS_DEV==='true'?true:false;
-  console.log(typeof(isDev))
+
   useEffect(() => {
     fetchData();
 

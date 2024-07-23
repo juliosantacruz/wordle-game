@@ -9,8 +9,8 @@ const formatTime = (seconds:number) => {
 
 
 export default function Stats() {
-  const { setStats, gamesWon, gamesPlayed, word, lostGame, winGame, gameInit } = useGameStore();
-  const leTimer = false
+  const { setStats, gamesWon, gamesPlayed, wordData, lostGame, winGame, gameInit } = useGameStore();
+  const leTimer = true
   const minutesTimer=5
   const secondsTimer = 60 * minutesTimer
   const [timer, setTimer] = useState(secondsTimer);
@@ -20,7 +20,7 @@ export default function Stats() {
     let interval:string|number|NodeJS.Timeout;
     if (leTimer&&lostGame || leTimer&&winGame) {
       setIsButtonDisabled(true);
-      setTimer(300); // Reinicia el temporizador a 5 minutos
+      setTimer(5); // Reinicia el temporizador a 5 minutos
       interval = setInterval(() => {
         setTimer(prevTimer => {
           if (prevTimer > 0) {
@@ -61,11 +61,20 @@ export default function Stats() {
           <div className="title text-[21px]">Victorias</div>
         </div>
       </div>
-      {lostGame ? (
-        <div className="nextGame flex flex-col items-center my-4">
-          <div className="title uppercase text-[19px]">
-            La palabra era:{" "}
-            <span className="uppercase font-extrabold">{word}</span>
+      {lostGame||winGame ? (
+        <div className="nextGame flex flex-col items-center my-4 justify-center mx-8">
+          <div className="title  text-[19px]">
+            La palabra es:{" "}
+            <span className="uppercase font-extrabold ">{wordData.word}</span>
+            <p>{wordData.description}</p>
+            {
+              wordData.image?
+              <img src={wordData.image} alt="word image" className="w-[340px] h-auto" />:null
+            }
+            {
+              wordData.url?
+              <a href={wordData.image} target="_blank" >Ver Mas </a>:null
+            }
           </div>
         </div>
       ) : null}
