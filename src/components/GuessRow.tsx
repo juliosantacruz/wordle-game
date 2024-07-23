@@ -24,7 +24,7 @@ export default function GuessRow({ guess, word, isGuessed }: Props) {
         return (
           <div
           key={"char" + guess[i] + i}
-          className={`relative w-full before:block before:pt-[100%] rounded-md ${bgColor} font-bold uppercase text-white flex justify-center items-center text-3xl`}
+          className={`relative w-full before:block before:pt-[100%] rounded-md ${bgColor} font-bold uppercase dark:text-white text-[#252525] flex justify-center items-center text-3xl`}
         >
           <div className="absolute inset-0 flex justify-center items-center">
             {guess[i]}
