@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
   ],
-  base: "/wordle-game/",
+  base: "https://medmania.xyz/",
   ...(process.env.NODE_ENV === "development"
     ? {
         define: {
