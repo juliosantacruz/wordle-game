@@ -45,7 +45,7 @@ export default function Header({darkMode, setDarkMode }:Props) {
         </button>
       </div>
 
-      <div className="sm:text-xl md:text-2xl lg:sm:text-4xl  font-bold uppercase font text-[#202537] dark:text-[#DADCE0] ">wordle</div>
+      <div className="sm:text-xl md:text-2xl lg:sm:text-4xl  font-bold  font text-[#202537] dark:text-[#DADCE0] ">MEDMania</div>
 
       <div className="w-[70px]">
         <div className="flex items-center gap-2 ">
