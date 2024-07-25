@@ -48,7 +48,7 @@ export default function Stats() {
 
   }
   return (
-    <div className="flex flex-col justify-center items-center w-[95%] h-[90%] max-w-[546px] max-h-[1018px] border border-black bg-[#F3F3F3] text-[#000000] dark:text-[#FFFFFF] dark:bg-[#262B3C] dark:border-[#939B9F] rounded-2xl">
+    <div className="flex flex-col justify-center items-center w-[95%] h-[90%] max-w-[520px] max-h-[1018px] border border-black bg-[#F3F3F3] text-[#000000] dark:text-[#FFFFFF] dark:bg-[#262B3C] dark:border-[#939B9F] rounded-2xl">
       <h2 className="text-[35px] font-extrabold">Estadísticas</h2>
 
       <div className="score w-full flex justify-around my-8">

@@ -12,7 +12,7 @@ export default function TheRules() {
   };
 
   return (
-    <div className="w-11/12   max-w-[546px] max-h-[1018px] flex flex-col justify-between rounded-xl px-4 py-4 border bg-[#F3F3F3] dark:bg-[#262B3C] border-[#262B3C]  dark:border-[#F3F3F3] ">
+    <div className="w-11/12  max-w-[520px] max-h-[1000px] flex flex-col justify-between rounded-xl px-4 py-4 border bg-[#F3F3F3] dark:bg-[#262B3C] border-[#262B3C]  dark:border-[#F3F3F3] ">
       <div className="header text-center text-2xl md:text-[35px] font-semibold       dark:text-[white] text-[black]">
         Cómo jugar
       </div>
