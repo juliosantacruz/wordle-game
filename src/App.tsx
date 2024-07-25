@@ -7,6 +7,7 @@ import TheRules from "./components/TheRules";
 import Stats from "@/components/Stats";
 import { useGameStore, useWordleStore } from "./store/gameStore";
 import AsideModal from "./components/AsideModal";
+import ReactGA from 'react-ga4';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -19,6 +20,7 @@ function App() {
   const currenGuess = useGameStore((state) => state.currentGuess);
 
   const isDev = import.meta.env.VITE_IS_DEV==='true'?true:false;
+  ReactGA.initialize('G-XCG3LZTS1B');
 
   useEffect(() => {
     fetchData();
@@ -31,6 +33,9 @@ function App() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  ReactGA.send({ hitType: "pageview", page: "/", title: "Home" });
+
 
   return (
     <>
