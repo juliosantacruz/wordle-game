@@ -18,3 +18,8 @@ export async  function  getWordList(){
 
 }
 
+export const getImageUrl =(image:string)=>{
+  const urlBase='https://res.cloudinary.com/dqhvp0atv/'
+  const imageUrl = urlBase + image
+  return imageUrl
+}
