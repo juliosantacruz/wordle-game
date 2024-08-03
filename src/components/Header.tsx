@@ -7,6 +7,8 @@ import darkIcon from "@/assets/icon/dark_Sky Switch - Dark.png";
 import darkChart from "@/assets/icon/dark_Chart_fill.png";
 import darkQuestion from "@/assets/icon/dark_question-circle-fill.png";
 import { useGameStore } from "@/store/gameStore";
+import darkMenu from '@/assets/icon/menuBlack.svg'
+import lightMenu from '@/assets/icon/menuLight.svg'
 
 
 type Props={
@@ -49,7 +51,7 @@ export default function Header({darkMode, setDarkMode }:Props) {
 
       <div className="w-[70px]">
         <div className="flex items-center gap-2 ">
-          <button onClick={showStats}>
+          {/* <button onClick={showStats}>
             {" "}
             <img
               src={darkMode ? darkChart : lightChart}
@@ -61,6 +63,14 @@ export default function Header({darkMode, setDarkMode }:Props) {
             {" "}
             <img
               src={darkMode ? darkIcon : lightIcon}
+              className="h-[22px]"
+              alt="IconDarkMode"
+            />
+          </button> */}
+          <button >
+
+          <img
+              src={darkMode ? darkMenu : lightMenu}
               className="h-[22px]"
               alt="IconDarkMode"
             />
