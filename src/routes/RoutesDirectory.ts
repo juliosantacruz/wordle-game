@@ -1,5 +1,5 @@
 export const RoutesDirectory={
-  LOG_IN:'/login',
+  LOG_IN:'/iniciar-sesion',
   SIGN_IN:'/registro',
   HOME :'/',
   WORDLE:'/wordle',

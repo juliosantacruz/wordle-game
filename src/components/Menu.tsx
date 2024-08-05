@@ -47,7 +47,7 @@ export default function Menu({ showMenu }: { showMenu: boolean }) {
             <span className="ml-2 dark:text-[white] text-[black]">Las Reglas</span>
           </li>
         </Link>
-        <Link to={RoutesDirectory.THE_RULES}>
+        <Link to={RoutesDirectory.LOG_IN}>
           <li className="flex pl-2 py-2 cursor-pointer hover:bg-slate-300 hover:rounded-md">
             <img
               src={darkMode ? darkQuestion : lightQuestion}
