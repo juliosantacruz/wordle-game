@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import lightIcon from "@/assets/icon/light_Sky Switch - Light.png";
 // import lightChart from "@/assets/icon/light_Chart_duotone_line.png";
-import lightQuestion from "@/assets/icon/light_question-circle-fill.png";
 
 import darkIcon from "@/assets/icon/dark_Sky Switch - Dark.png";
 // import darkChart from "@/assets/icon/dark_Chart_fill.png";
-import darkQuestion from "@/assets/icon/dark_question-circle-fill.png";
-import { useGameStore } from "@/store/gameStore";
+// import { useGameStore } from "@/store/gameStore";
 import darkMenu from "@/assets/icon/menuBlack.svg";
 import lightMenu from "@/assets/icon/menuLight.svg";
 import Menu from "./Menu";
@@ -17,15 +15,12 @@ type Props = {
 };
 export default function Header({ darkMode, setDarkMode }: Props) {
   const [showMenu, setShowMenu] = useState(false);
-  const { setTheRules, setStats } = useGameStore();
+  // const { setTheRules, setStats } = useGameStore();
 
   const handleMenu = () => {
     setShowMenu(!showMenu);
   };
 
-  const showTheRules = () => {
-    setTheRules(true);
-  };
 
   useEffect(() => {
     if (darkMode) {
@@ -37,7 +32,7 @@ export default function Header({ darkMode, setDarkMode }: Props) {
   return (
     <>
       <nav className="flex items-center justify-between w-full max-w-[638px] sm:h-[64px] md:h-[74px] mb-2 rounded-[15px] bg-[#F3F3F3] dark:bg-gray-800 p-4 ">
-        <div className="w-[70px]">
+        <div className="flex justify-center  ">
           <button onClick={() => setDarkMode(!darkMode)}>
             {" "}
             <img
@@ -52,7 +47,7 @@ export default function Header({ darkMode, setDarkMode }: Props) {
           MEDMania
         </div>
 
-        <div className="w-[70px]">
+        <div className="flex justify-center  ">
           <div className="flex items-center gap-2 ">
             <button onClick={handleMenu}>
               <img
