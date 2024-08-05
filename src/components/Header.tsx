@@ -10,8 +10,8 @@ import lightMenu from "@/assets/icon/menuLight.svg";
 import Menu from "./Menu";
 
 type Props = {
-  darkMode: boolean;
-  setDarkMode: (value: boolean) => void;
+  darkMode?: boolean;
+  setDarkMode?: (value: boolean) => void;
 };
 export default function Header({ darkMode, setDarkMode }: Props) {
   const [showMenu, setShowMenu] = useState(false);
