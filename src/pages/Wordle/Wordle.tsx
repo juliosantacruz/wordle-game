@@ -5,7 +5,9 @@ import GuessRow from "@/components/GuessRow";
 import { useEffect, useState } from "react";
 import TheRules from "@/components/TheRules";
 import Stats from "@/components/Stats";
-import { useGameStore, useWordleStore } from "@/store/gameStore";
+import { useGameStore } from "@/store/gameStore";
+import { useUserStore } from "@/store/userStore";
+
 import AsideModal from "@/components/AsideModal";
 import ReactGA from 'react-ga4';
 
@@ -13,7 +15,7 @@ import ReactGA from 'react-ga4';
 function Wordle() {
   const [darkMode, setDarkMode] = useState(false);
   const { theRules, stats, handleKeyup, fetchData } = useGameStore();
-  const { isFirstTime } = useWordleStore();
+  const { isFirstTime } = useUserStore();
   const currentWord = useGameStore((state) => state.word);
   const guessesArray = useGameStore((state) => state.guessArray);
   const currenGuess = useGameStore((state) => state.currentGuess);

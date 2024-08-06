@@ -1,10 +1,12 @@
 import React from "react";
 import GuessRowSample from "@/components/GuessRowSample";
-import { useGameStore, useWordleStore } from "@/store/gameStore";
-
+import { useGameStore } from "@/store/gameStore";
+import {useUserStore} from  '@/store/userStore'
+import { Link } from "react-router-dom";
+import { RoutesDirectory } from "@/routes/RoutesDirectory";
 export default function TheRules() {
   const { setTheRules } = useGameStore();
-  const { setIsFirstTime } = useWordleStore();
+  const { setIsFirstTime } = useUserStore();
 
   const handleTheRules = () => {
     setTheRules(false);
@@ -63,21 +65,20 @@ export default function TheRules() {
         </p> */}
       </div>
       <div className="footer flex justify-center gap-2">
-        <button
-          onClick={handleTheRules}
-          className="text-white bg-[#6AAA6471] w-[200px] h-[32px] rounded font-extrabold text-[16px]"
-          disabled
+        <Link
+          to={RoutesDirectory.LOG_IN}
+          className="flex items-center justify-center text-white bg-[#6aaa64] w-[200px] h-[32px] rounded font-extrabold text-[16px]"
+
         >
           Iniciar Sesion
-        </button>
+        </Link>
 
-        <button
-          onClick={handleTheRules}
-          className="text-white bg-[#6469aa71]   w-[180px] h-[32px] rounded font-extrabold text-[16px]"
-          disabled
+        <Link
+          to={RoutesDirectory.SIGN_IN}
+          className="flex items-center justify-center text-white bg-[#6469aa]   w-[180px] h-[32px] rounded font-extrabold text-[16px]"
         >
           Registrar..!
-        </button>
+        </Link>
       </div>
       <div className="footer flex justify-center">
         <button

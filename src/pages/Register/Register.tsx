@@ -1,5 +1,7 @@
 import React from "react";
 import ImgLogo from "@/assets/Medmania_logo.jpeg";
+import { Link } from "react-router-dom";
+import { RoutesDirectory } from "@/routes/RoutesDirectory";
 
 export default function Register() {
   return (
@@ -51,9 +53,9 @@ export default function Register() {
           </div>
           <div className="btn-form flex flex-col items-center justify-center w-full">
             <p className="text-sm">Ya tienes cuenta ..? Inicia sesion Aqui..</p>
-            <button className=" max-w-[380px] w-full h-10 rounded-lg cursor-pointer bg-[rgba(255,255,255,0.5)] text-[#000] shadow-lg shadow-slate-500 hover:bg-[#ceb02cb9]">
+            <Link to={RoutesDirectory.LOG_IN} className="max-w-[380px] w-full h-10 flex justify-center items-center rounded-lg cursor-pointer bg-[rgba(255,255,255,0.5)] text-[#000] shadow-lg shadow-slate-500 hover:bg-[#ceb02cb9] hover:text-[#fff]">
               Inicar Sesion
-            </button>
+            </Link>
           </div>
           <div className="marginButton h-10"></div>
         </div>

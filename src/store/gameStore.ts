@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
 // import wordsList from "@/mock/wordsList.json";
-import { createJSONStorage, persist } from "zustand/middleware";
 import { getWordList } from "@/api/wordList";
 type WordData = {
   word: string;
@@ -10,10 +9,8 @@ type WordData = {
   image: string;
   category: string;
 };
-type UxStore = {
-  isFirstTime: boolean;
-  setIsFirstTime: () => void;
-};
+
+
 type Store = {
   theRules: boolean;
   setTheRules: (value: boolean) => any;
@@ -250,19 +247,3 @@ export const useGameStore = create<Store>()((set, get) => ({
   },
 }));
 
-export const useWordleStore = create<UxStore>()(
-  persist(
-    (set) => ({
-      isFirstTime: true,
-      setIsFirstTime: () =>
-        set((state) => ({
-          ...state,
-          isFirstTime: false,
-        })),
-    }),
-    {
-      name: "wordleUX",
-      storage: createJSONStorage(() => localStorage),
-    }
-  )
-);

@@ -1,10 +1,10 @@
 import React from "react";
 import GuessRowSample from "@/components/GuessRowSample";
-import { useGameStore, useWordleStore } from "@/store/gameStore";
-
+import { useGameStore } from "@/store/gameStore";
+import {useUserStore} from '@/store/userStore'
 export default function TheRules() {
   const { setTheRules } = useGameStore();
-  const { setIsFirstTime } = useWordleStore();
+  const { setIsFirstTime } = useUserStore();
 
   const handleTheRules = () => {
     setTheRules(false);
