@@ -4,18 +4,24 @@ import { useGameStore } from "@/store/gameStore";
 import {useUserStore} from  '@/store/userStore'
 import { Link } from "react-router-dom";
 import { RoutesDirectory } from "@/routes/RoutesDirectory";
+import { useNavigate } from "react-router-dom";
+
+
 export default function TheRules() {
   const { setTheRules } = useGameStore();
   const { setIsFirstTime } = useUserStore();
+  const navigate = useNavigate()
 
   const handleTheRules = () => {
     setTheRules(false);
     setIsFirstTime();
+    navigate(RoutesDirectory.HOME)
   };
 
   return (
-    <div className="w-11/12  max-w-[520px] max-h-[1000px] flex flex-col justify-between rounded-xl px-4 py-4 border bg-[#F3F3F3] dark:bg-[#262B3C] border-[#262B3C]  dark:border-[#F3F3F3] ">
-      <div className="header text-center text-2xl md:text-[35px] font-semibold       dark:text-[white] text-[black]">
+    <section className="w-screen flex flex-col justify-center items-center h-screen border-2 bg-[#F3F3F3] p-4">
+    <div className=" w-full flex flex-col justify-between rounded-xl px-4 py-4 border bg-[#F3F3F3] dark:bg-[#262B3C] border-[#262B3C]  dark:border-[#F3F3F3] ">
+      <div className="header text-center text-2xl md:text-[35px] font-semibold dark:text-[white] text-[black]">
         Cómo jugar
       </div>
       <div className="intro sm:text-lg md:text-[19px] dark:text-[white] text-[black]">
@@ -60,9 +66,7 @@ export default function TheRules() {
           Puede haber letras repetidas. Las pistas son independientes para cada
           letra.
         </p>
-        {/* <p className="text-center sm:text-lg md:text-[19px] sm:my-2 md:my-6  dark:text-[white] text-[black]">
-          ¡Una palabra nueva cada 5 minutos!
-        </p> */}
+
       </div>
       <div className="footer flex justify-center gap-2">
         <Link
@@ -90,5 +94,6 @@ export default function TheRules() {
         </button>
       </div>
     </div>
+    </section>
   );
 }
