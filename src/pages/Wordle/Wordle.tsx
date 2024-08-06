@@ -9,7 +9,7 @@ import { useGameStore } from "@/store/gameStore";
 import { useUserStore } from "@/store/userStore";
 
 import AsideModal from "@/components/AsideModal";
-import ReactGA from 'react-ga4';
+// import ReactGA from 'react-ga4';
 
 
 function Wordle() {
@@ -22,7 +22,7 @@ function Wordle() {
   const isDev = import.meta.env.VITE_IS_DEV==='true'?true:false;
 
 
-  ReactGA.initialize('G-XCG3LZTS1B');
+  // ReactGA.initialize('G-XCG3LZTS1B');
 
   useEffect(() => {
     fetchData();
@@ -36,13 +36,13 @@ function Wordle() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  ReactGA.send({ hitType: "pageview", page: "/", title: "Home" });
+  // ReactGA.send({ hitType: "pageview", page: "/", title: "Home" });
 
 
   return (
     <>
       <div className="max-w-[520px] h-screen w-screen mx-auto flex flex-col items-center justify-between bg-[#F9F9F9] dark:bg-[#262B3C]">
-        <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Header   />
         <div className="w-full flex flex-col items-center my-[50px] px-2   ">
           {guessesArray.map((_, index) => {
             return (

@@ -8,13 +8,12 @@ import darkIcon from "@/assets/icon/dark_Sky Switch - Dark.png";
 import darkMenu from "@/assets/icon/menuBlack.svg";
 import lightMenu from "@/assets/icon/menuLight.svg";
 import Menu from "./Menu";
+import { useUserStore } from "@/store/userStore";
 
-type Props = {
-  darkMode?: boolean;
-  setDarkMode?: (value: boolean) => void;
-};
-export default function Header({ darkMode, setDarkMode }: Props) {
+
+export default function Header( ) {
   const [showMenu, setShowMenu] = useState(false);
+  const {darkMode, setDarkMode} = useUserStore()
   // const { setTheRules, setStats } = useGameStore();
 
   const handleMenu = () => {
@@ -31,7 +30,7 @@ export default function Header({ darkMode, setDarkMode }: Props) {
   }, [darkMode]);
   return (
     <>
-      <nav className="flex items-center justify-between w-full max-w-[638px] sm:h-[64px] md:h-[74px] mb-2 rounded-[15px] bg-[#F3F3F3] dark:bg-gray-800 p-4 ">
+      <nav className="flex items-center justify-between mx-auto w-full max-w-[638px] sm:h-[64px] md:h-[74px] mb-2 rounded-[15px] bg-[#F3F3F3] dark:bg-gray-800 p-4 ">
         <div className="flex justify-center  ">
           <button onClick={() => setDarkMode(!darkMode)}>
             {" "}

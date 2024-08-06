@@ -12,6 +12,9 @@ type UserStore={
   user:UserData
   isFirstTime: boolean;
   setIsFirstTime: () => void;
+
+  darkMode:boolean;
+  setDarkMode: (value: boolean) => void;
 }
 
 export const useUserStore = create<UserStore>()(
@@ -26,6 +29,14 @@ export const useUserStore = create<UserStore>()(
         ...state,
         isFirstTime: false,
       })),
+
+    darkMode:false,
+    setDarkMode(value) {
+      set((state)=>({
+        ...state,
+        darkMode:value
+      }))
+    },
 }),{
   name:'wordleUser',
   storage: createJSONStorage(()=> localStorage)

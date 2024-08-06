@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import GuessRowSample from "@/components/GuessRowSample";
 import { useGameStore } from "@/store/gameStore";
 import {useUserStore} from  '@/store/userStore'
@@ -19,8 +19,8 @@ export default function TheRules() {
   };
 
   return (
-    <section className="w-screen flex flex-col justify-center items-center h-screen border-2 bg-[#F3F3F3] p-4">
-    <div className=" w-full flex flex-col justify-between rounded-xl px-4 py-4 border bg-[#F3F3F3] dark:bg-[#262B3C] border-[#262B3C]  dark:border-[#F3F3F3] ">
+    <section className="w-screen  flex flex-col justify-center items-center h-screen border-2 bg-[#F3F3F3] p-4">
+    <div className=" w-full max-w-[420px] flex flex-col justify-between rounded-xl px-4 py-4 border bg-[#F3F3F3] dark:bg-[#262B3C] border-[#262B3C]  dark:border-[#F3F3F3] ">
       <div className="header text-center text-2xl md:text-[35px] font-semibold dark:text-[white] text-[black]">
         Cómo jugar
       </div>
