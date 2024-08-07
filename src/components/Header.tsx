@@ -30,7 +30,7 @@ export default function Header( ) {
   }, [darkMode]);
   return (
     <>
-      <nav className="flex items-center justify-between mx-auto w-full max-w-[638px] sm:h-[64px] md:h-[74px] mb-2 rounded-[15px] bg-[#F3F3F3] dark:bg-gray-800 p-4 ">
+      <nav className="flex items-center justify-between mx-auto w-full max-w-[638px] sm:h-[64px] md:h-[74px] mb-2 rounded-[15px] bg-[#e4e4e4] dark:bg-gray-800 p-4 ">
         <div className="flex justify-center  ">
           <button onClick={() => setDarkMode(!darkMode)}>
             {" "}

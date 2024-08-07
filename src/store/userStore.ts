@@ -1,45 +1,72 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-
 type UserData = {
-  username:string
-  email:string
-}
+  username: string;
+  email: string;
+  userId: string | number;
+};
 
-type UserStore={
-  user:UserData
-  isLogin:boolean
+type UserStore = {
+  user: UserData;
+  setUser: (user) => void;
+
+  isLogin: boolean;
+  setIsLogin: (user) => void;
+  setLogout: () => void;
+
   isFirstTime: boolean;
   setIsFirstTime: () => void;
 
-  darkMode:boolean;
+  darkMode: boolean;
   setDarkMode: (value: boolean) => void;
-}
+};
 
 export const useUserStore = create<UserStore>()(
-  persist((set,get)=>({
-    user:{
-      username:'',
-      email:''
-    },
-    isLogin:false,
-    isFirstTime: true,
-    setIsFirstTime: () =>
-      set((state) => ({
-        ...state,
-        isFirstTime: false,
-      })),
+  persist(
+    (set, get) => ({
+      user: {
+        userId: "",
+        username: "",
+        email: "",
+      },
+      setUser: (user: any) => set(() => ({ user: user })),
 
-    darkMode:false,
-    setDarkMode(value) {
-      set((state)=>({
-        ...state,
-        darkMode:value
-      }))
-    },
-}),{
-  name:'wordleUser',
-  storage: createJSONStorage(()=> localStorage)
-}))
+      isLogin: false,
+      setIsLogin: (value: boolean) =>
+        set((state) => ({ ...state, isLogin: value })),
+      setLogout:()=>(
+        set((state)=>({
+          ...state,
+          user: {
+            userId: "",
+            username: "",
+            email: "",
+          },
+          isLogin:false
+        }))
+      ),
+
+      isFirstTime: true,
+      setIsFirstTime: () =>
+        set((state) => ({
+          ...state,
+          isFirstTime: false,
+        })),
+
+      darkMode: false,
+      setDarkMode(value) {
+        set((state) => ({
+          ...state,
+          darkMode: value,
+        }));
+      },
+    }),
+    {
+      name: "wordleUser",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);

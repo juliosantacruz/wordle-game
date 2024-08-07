@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import ImgLogo from "@/assets/Medmania_logo.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RoutesDirectory } from "@/routes/RoutesDirectory";
 import Header from "@/components/Header";
+import { RegisterServer } from "@/api/services";
+import { useUserStore } from "@/store/userStore";
 
 type FormRegister = {
   name: string;
@@ -11,19 +15,26 @@ type FormRegister = {
   email: string;
   password: string;
   confirmPassword: string;
+  phone: string;
+  is_admin: boolean;
 };
 
 const formDataDefault = {
+  username: "",
   name: "",
   lastname: "",
-  username: "",
   email: "",
   password: "",
   confirmPassword: "",
+  phone:'',
+  is_admin:false
 };
 
 export default function Register() {
+  const [error, setError]=useState(false)
   const [formData, setFormData] = useState<FormRegister>(formDataDefault);
+  const {setIsLogin,setUser} = useUserStore()
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,9 +44,18 @@ export default function Register() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("se envio", formData.password, formData.confirmPassword);
+    const data = await RegisterServer(formData )
+    if(data && 'response' in data && (data.response as Response).ok){
+      setError(false)
+      setIsLogin(true)
+      setUser(data.login)
+      navigate(RoutesDirectory.HOME)
+    }else{
+      setError(true)
+
+    }
   };
 
   return (
@@ -128,6 +148,10 @@ export default function Register() {
               className="border w-full p-2 rounded-lg "
             />
           </div>
+          {
+        error&&
+        <p className="text-sm text-red-700">{"-> Contraseña o usuario no coincide, por favor verifique"}</p>
+      }
           <div className="btn-form flex justify-center w-full">
             <button
               type="submit"

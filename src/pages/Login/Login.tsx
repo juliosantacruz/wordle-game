@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import ImgLogo from "@/assets/Medmania_logo.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RoutesDirectory } from "@/routes/RoutesDirectory";
 import Header from "@/components/Header";
+import { LogInServer } from "@/api/services";
+import { useUserStore } from "@/store/userStore";
 
 type FormLogin = {
   username: string;
@@ -10,6 +12,9 @@ type FormLogin = {
 };
 
 export default function Login() {
+  const navigate = useNavigate();
+  const {setIsLogin,setUser} = useUserStore()
+
   const [formData, setFormData] = useState<FormLogin>({
     username: "",
     password: "",
@@ -23,9 +28,20 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("se envio", formData);
+
+    const response = await LogInServer(formData)
+
+    if(response ){
+      setIsLogin(true)
+      setUser(response)
+      navigate(RoutesDirectory.HOME)
+    }
+
+
+    console.log(response)
   };
 
   return (
