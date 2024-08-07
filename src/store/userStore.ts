@@ -10,6 +10,7 @@ type UserData = {
 
 type UserStore={
   user:UserData
+  isLogin:boolean
   isFirstTime: boolean;
   setIsFirstTime: () => void;
 
@@ -23,6 +24,7 @@ export const useUserStore = create<UserStore>()(
       username:'',
       email:''
     },
+    isLogin:false,
     isFirstTime: true,
     setIsFirstTime: () =>
       set((state) => ({

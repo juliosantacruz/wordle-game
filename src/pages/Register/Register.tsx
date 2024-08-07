@@ -39,7 +39,7 @@ export default function Register() {
   };
 
   return (
-    <section className="flex flex-col  h-screen border-2 bg-[#F3F3F3] p-4">
+    <section className="flex flex-col  h-screen border-2 bg-[#F3F3F3] p-4 dark:bg-[#262B3C] dark:text-[#ffffff]">
       <Header/>
       <div className="logo-section flex justify-center items-center h-1/3 ">
         <div className="logo rounded-full overflow-hidden bg-black h-48 w-48">
@@ -140,7 +140,7 @@ export default function Register() {
             <p className="text-sm">Ya tienes cuenta ..? Inicia sesion Aqui..</p>
             <Link
               to={RoutesDirectory.LOG_IN}
-              className="max-w-[380px] w-full h-10 flex justify-center items-center rounded-lg cursor-pointer bg-[rgba(255,255,255,0.5)] text-[#000] shadow-lg shadow-slate-500 hover:bg-[#ceb02cb9] hover:text-[#fff]"
+              className="max-w-[380px] w-full h-10 flex justify-center items-center rounded-lg cursor-pointer bg-[rgba(255,255,255,0.5)] text-[#000] dark:text-[#fff] shadow-lg shadow-slate-500 hover:bg-[#ceb02cb9] hover:text-[#fff]"
             >
               Iniciar Sesion
             </Link>

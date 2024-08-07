@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ImgLogo from "@/assets/Medmania_logo.jpeg";
 import { Link } from "react-router-dom";
 import { RoutesDirectory } from "@/routes/RoutesDirectory";
+import Header from "@/components/Header";
 
 type FormLogin = {
   username: string;
@@ -28,7 +29,8 @@ export default function Login() {
   };
 
   return (
-    <section className="flex flex-col h-screen border-2 bg-[#F3F3F3] p-4">
+    <section className="flex flex-col h-screen border-2 bg-[#F3F3F3] p-4 dark:bg-[#262B3C] dark:text-[#ffffff]">
+      <Header/>
       <div className="logo-section flex justify-center items-center h-2/5 ">
         <div className="logo rounded-full overflow-hidden bg-black h-48 w-48">
           <img src={ImgLogo} alt="Logo" className="object-cover" />
@@ -76,7 +78,7 @@ export default function Login() {
 
             <Link
               to={RoutesDirectory.SIGN_IN}
-              className=" max-w-[380px] w-full h-10 flex justify-center items-center rounded-lg cursor-pointer bg-[rgba(255,255,255,0.5)] text-[#000] shadow-lg shadow-slate-500 hover:bg-[#ceb02cb9] hover:text-[#fff]"
+              className=" max-w-[380px] w-full h-10 flex justify-center items-center rounded-lg cursor-pointer bg-[rgba(255,255,255,0.5)] text-[#000] shadow-lg shadow-slate-500 hover:bg-[#ceb02cb9] hover:text-[#fff] dark:text-[#ffffff]"
             >
               Registrate
             </Link>

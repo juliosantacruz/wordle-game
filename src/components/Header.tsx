@@ -13,7 +13,7 @@ import { useUserStore } from "@/store/userStore";
 
 export default function Header( ) {
   const [showMenu, setShowMenu] = useState(false);
-  const {darkMode, setDarkMode} = useUserStore()
+  const { darkMode, setDarkMode} = useUserStore()
   // const { setTheRules, setStats } = useGameStore();
 
   const handleMenu = () => {

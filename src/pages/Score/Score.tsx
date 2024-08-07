@@ -1,6 +1,9 @@
 import { getImageUrl } from "@/api/wordList";
+import Header from "@/components/Header";
+import { RoutesDirectory } from "@/routes/RoutesDirectory";
 import { useGameStore } from "@/store/gameStore";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
@@ -23,6 +26,8 @@ export default function Score() {
   const secondsTimer = 60 * minutesTimer;
   const [timer, setTimer] = useState(secondsTimer);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     let interval: string | number | NodeJS.Timeout;
@@ -48,6 +53,7 @@ export default function Score() {
   }, [lostGame, winGame]);
 
   const lePlay = () => {
+    navigate(RoutesDirectory.HOME)
     setStats(false);
 
     if (lostGame || winGame) {
@@ -55,6 +61,9 @@ export default function Score() {
     }
   };
   return (
+    <section className="flex flex-col justify-start items-center h-screen border-2 bg-[#F3F3F3] p-4 dark:bg-[#262B3C] dark:text-[#ffffff]">
+      <Header/>
+
     <div className="flex flex-col justify-center items-center w-[95%] h-[90%] max-w-[520px] max-h-[1018px] border border-black bg-[#F3F3F3] text-[#000000] dark:text-[#FFFFFF] dark:bg-[#262B3C] dark:border-[#939B9F] rounded-2xl">
       <h2 className="text-[35px] font-extrabold">Estadísticas</h2>
 
@@ -113,5 +122,7 @@ export default function Score() {
         Aceptar
       </button>
     </div>
+    </section>
+
   );
 }
