@@ -1,6 +1,5 @@
 import React  from "react";
 import GuessRowSample from "@/components/GuessRowSample";
-import { useGameStore } from "@/store/gameStore";
 import {useUserStore} from  '@/store/userStore'
 import { Link } from "react-router-dom";
 import { RoutesDirectory } from "@/routes/RoutesDirectory";
@@ -9,7 +8,7 @@ import Header from "@/components/Header";
 
 
 export default function TheRules() {
-  const { setTheRules } = useGameStore();
+  const { setTheRules } = useUserStore();
   const { setIsFirstTime } = useUserStore();
   const navigate = useNavigate()
 

@@ -3,26 +3,32 @@ import Header from "@/components/Header";
 import Keyboard from "@/components/Keyboard";
 import GuessRow from "@/components/GuessRow";
 import { useEffect, useState } from "react";
-import TheRules from "@/components/TheRules";
 import Stats from "@/components/Stats";
 import { useGameStore } from "@/store/gameStore";
 import { useUserStore } from "@/store/userStore";
 
 import AsideModal from "@/components/AsideModal";
+import { useNavigate } from "react-router-dom";
+import { RoutesDirectory } from "@/routes/RoutesDirectory";
 // import ReactGA from 'react-ga4';
 
 
 function Wordle() {
   const [darkMode, setDarkMode] = useState(false);
-  const { theRules, stats, handleKeyup, fetchData } = useGameStore();
+  const { stats, handleKeyup, fetchData } = useGameStore();
   const { isFirstTime } = useUserStore();
   const currentWord = useGameStore((state) => state.word);
   const guessesArray = useGameStore((state) => state.guessArray);
   const currenGuess = useGameStore((state) => state.currentGuess);
   const isDev = import.meta.env.VITE_IS_DEV==='true'?true:false;
+  const navigate = useNavigate()
 
+  useEffect(()=>{
 
-  // ReactGA.initialize('G-XCG3LZTS1B');
+    if(isFirstTime){
+      navigate(RoutesDirectory.THE_RULES)
+    }
+  })
 
   useEffect(() => {
     fetchData();
@@ -36,7 +42,6 @@ function Wordle() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ReactGA.send({ hitType: "pageview", page: "/", title: "Home" });
 
 
   return (
@@ -65,12 +70,7 @@ function Wordle() {
         <Keyboard darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
 
-      {theRules || isFirstTime ? (
-        <AsideModal
-          children={<TheRules />}
-          openModal={theRules || isFirstTime}
-        />
-      ) : null}
+
       {stats ? <AsideModal children={<Stats />} openModal={stats} /> : null}
     </>
   );

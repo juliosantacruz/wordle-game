@@ -10,6 +10,9 @@ type UserData = {
 };
 
 type UserStore = {
+  theRules: boolean;
+  setTheRules: (value: boolean) => any;
+
   user: UserData;
   setUser: (user) => void;
 
@@ -27,6 +30,13 @@ type UserStore = {
 export const useUserStore = create<UserStore>()(
   persist(
     (set, get) => ({
+      theRules: false,
+      setTheRules: (value: boolean) =>
+        set((state) => ({
+          ...state,
+          theRules: value,
+        })),
+
       user: {
         userId: "",
         username: "",
@@ -37,17 +47,16 @@ export const useUserStore = create<UserStore>()(
       isLogin: false,
       setIsLogin: (value: boolean) =>
         set((state) => ({ ...state, isLogin: value })),
-      setLogout:()=>(
-        set((state)=>({
+      setLogout: () =>
+        set((state) => ({
           ...state,
           user: {
             userId: "",
             username: "",
             email: "",
           },
-          isLogin:false
-        }))
-      ),
+          isLogin: false,
+        })),
 
       isFirstTime: true,
       setIsFirstTime: () =>

@@ -12,8 +12,7 @@ type WordData = {
 
 
 type Store = {
-  theRules: boolean;
-  setTheRules: (value: boolean) => any;
+
   stats: boolean;
   setStats: (value: boolean) => void;
 
@@ -49,12 +48,7 @@ type Store = {
 
 export const useGameStore = create<Store>()((set, get) => ({
   // Ux States
-  theRules: false,
-  setTheRules: (value: boolean) =>
-    set((state) => ({
-      ...state,
-      theRules: value,
-    })),
+
   stats: false,
   setStats: (value: boolean) =>
     set((state) => ({
