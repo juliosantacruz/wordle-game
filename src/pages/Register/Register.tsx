@@ -32,6 +32,8 @@ const formDataDefault = {
 
 export default function Register() {
   const [error, setError]=useState(false)
+  const [loading, setloading] = useState(false)
+
   const [formData, setFormData] = useState<FormRegister>(formDataDefault);
   const {setIsLogin,setUser} = useUserStore()
   const navigate = useNavigate();
@@ -47,13 +49,18 @@ export default function Register() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = await RegisterServer(formData )
+    setloading(true)
+
     if(data && 'response' in data && (data.response as Response).ok){
       setError(false)
       setIsLogin(true)
+    setloading(false)
+
       setUser(data.login)
       navigate(RoutesDirectory.HOME)
     }else{
       setError(true)
+      setloading(false)
 
     }
   };
@@ -71,6 +78,10 @@ export default function Register() {
           onSubmit={(e) => handleSubmit(e)}
           className="input-container h-full flex flex-col justify-end items-center  gap-2 mb-6"
         >
+          {
+            loading&&
+            <p className="text-sm text-blue-700">{"cargando....."}</p>
+          }
           <div className="input-form flex flex-col  max-w-[380px] w-full rounded-lg ">
             <label htmlFor="" className="pl-1 font-semibold">
               Nombre:
@@ -155,7 +166,7 @@ export default function Register() {
           <div className="btn-form flex justify-center w-full">
             <button
               type="submit"
-              className=" max-w-[380px] w-full h-10 rounded-lg cursor-pointer bg-[#6AAA64] text-[#fff] font-semibold shadow-lg shadow-slate-500"
+              className=" max-w-[380px] w-full h-10 rounded-lg cursor-pointer bg-[#6AAA64] text-[#fff] font-semibold shadow-lg shadow-slate-500 hover:bg-[#6aaa64e7]"
             >
               Enviar
             </button>
