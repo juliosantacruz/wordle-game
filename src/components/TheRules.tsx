@@ -1,9 +1,9 @@
 import React from "react";
 import GuessRowSample from "@/components/GuessRowSample";
-import { useGameStore } from "@/store/gameStore";
 import {useUserStore} from '@/store/userStore'
 export default function TheRules() {
-  const { setTheRules } = useGameStore();
+  const { setTheRules } = useUserStore();
+
   const { setIsFirstTime } = useUserStore();
 
   const handleTheRules = () => {
