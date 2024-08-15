@@ -16,9 +16,9 @@ export default function GuessRow({ guess, word, isGuessed }: Props) {
         const bgColor = !isGuessed
           ? "bg-[#939B9F33]"
           : guess[i] === word[i]
-          ? "bg-[#6AAA64]"
+          ? "bg-[#6AAA64] animate-bounce-green"
           : word.includes(guess[i])
-          ? "bg-[#CEB02C]"
+          ? "bg-[#CEB02C] animate-bounce-letter"
           : "bg-[#939B9F]";
 
         return (

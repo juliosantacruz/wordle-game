@@ -2,6 +2,7 @@ import { getImageUrl } from "@/api/wordList";
 import Header from "@/components/Header";
 import { RoutesDirectory } from "@/routes/RoutesDirectory";
 import { useGameStore } from "@/store/gameStore";
+import { useUserStore } from "@/store/userStore";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +14,6 @@ const formatTime = (seconds: number) => {
 
 export default function Score() {
   const {
-    setStats,
     gamesWon,
     gamesPlayed,
     wordData,
@@ -21,6 +21,8 @@ export default function Score() {
     winGame,
     gameInit,
   } = useGameStore();
+  const { setStats } = useUserStore()
+
   const leTimer = true;
   const minutesTimer = 5;
   const secondsTimer = 60 * minutesTimer;

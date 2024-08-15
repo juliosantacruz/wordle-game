@@ -1,5 +1,6 @@
 import { getImageUrl } from "@/api/wordList";
 import { useGameStore } from "@/store/gameStore";
+import { useUserStore } from "@/store/userStore";
 import React, { useEffect, useState } from "react";
 
 const formatTime = (seconds: number) => {
@@ -10,7 +11,6 @@ const formatTime = (seconds: number) => {
 
 export default function Stats() {
   const {
-    setStats,
     gamesWon,
     gamesPlayed,
     wordData,
@@ -18,6 +18,7 @@ export default function Stats() {
     winGame,
     gameInit,
   } = useGameStore();
+  const { setStats } = useUserStore()
   const leTimer = true;
   const minutesTimer = 5;
   const secondsTimer = 60 * minutesTimer;

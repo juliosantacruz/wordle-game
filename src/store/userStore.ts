@@ -10,6 +10,9 @@ type UserData = {
 };
 
 type UserStore = {
+  stats: boolean;
+  setStats: (value: boolean) => void;
+
   theRules: boolean;
   setTheRules: (value: boolean) => any;
 
@@ -30,6 +33,12 @@ type UserStore = {
 export const useUserStore = create<UserStore>()(
   persist(
     (set, get) => ({
+      stats: false,
+      setStats: (value: boolean) =>
+        set((state) => ({
+          ...state,
+          stats: value,
+        })),
       theRules: false,
       setTheRules: (value: boolean) =>
         set((state) => ({

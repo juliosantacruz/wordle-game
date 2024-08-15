@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
-// import wordsList from "@/mock/wordsList.json";
 import { getWordList } from "@/api/wordList";
+
 type WordData = {
   word: string;
   description: string;
@@ -12,11 +12,7 @@ type WordData = {
 
 
 type Store = {
-
-  stats: boolean;
-  setStats: (value: boolean) => void;
-
-  wordsList: any[];
+  wordsList: WordData[];
   wordData: WordData;
   isLoading: boolean;
   word: string;
@@ -47,26 +43,20 @@ type Store = {
 };
 
 export const useGameStore = create<Store>()((set, get) => ({
-  // Ux States
-
-  stats: false,
-  setStats: (value: boolean) =>
-    set((state) => ({
-      ...state,
-      stats: value,
-    })),
-
   fetchData: async () => {
     set({ isLoading: true });
-
+    console.log(get().wordsList)
     try {
-      const data = await getWordList();
-      set((state) => ({
-        ...state,
-        wordsList: data,
-        wordData:
-        data[Math.round(Math.random() * data.length)],
-      }));
+      if(get().wordsList.length===0){
+        const data = await getWordList();
+        set((state) => ({
+          ...state,
+          wordsList: data,
+          wordData:
+          data[Math.round(Math.random() * data.length)],
+        }));
+
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -100,7 +90,7 @@ export const useGameStore = create<Store>()((set, get) => ({
           gamesWon: state.gamesWon + 1,
           gamesPlayed: state.gamesPlayed + 1,
           winGame: true,
-          stats: true,
+          // stats: true,
         }));
       }
       return isWin;
@@ -115,7 +105,7 @@ export const useGameStore = create<Store>()((set, get) => ({
           ...state,
           gamesPlayed: state.gamesPlayed + 1,
           lostGame: true,
-          stats: true,
+          // stats: true,
         }));
       }
       return isLost;
@@ -177,7 +167,7 @@ export const useGameStore = create<Store>()((set, get) => ({
   gameInit: () =>
     set((state) => ({
       ...state,
-      word: state.wordData.word.toLowerCase(),
+      word: state.wordsList[Math.round(Math.random() * state.wordsList.length)].word.toLowerCase(),
       guessArray: ["", "", "", "", ""],
       currentGuess: 0,
       lostGame: false,

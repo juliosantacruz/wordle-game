@@ -15,8 +15,9 @@ import { RoutesDirectory } from "@/routes/RoutesDirectory";
 
 function Wordle() {
   const [darkMode, setDarkMode] = useState(false);
-  const { stats, handleKeyup, fetchData } = useGameStore();
-  const { isFirstTime } = useUserStore();
+  const { handleKeyup, fetchData } = useGameStore();
+  const { isFirstTime, stats, } = useUserStore();
+  const isLoading = useGameStore((state) => state.isLoading);
   const currentWord = useGameStore((state) => state.word);
   const guessesArray = useGameStore((state) => state.guessArray);
   const currenGuess = useGameStore((state) => state.currentGuess);
@@ -31,9 +32,9 @@ function Wordle() {
   })
 
   useEffect(() => {
-    fetchData();
 
-    // gameInit();
+  fetchData();
+
     window.addEventListener("keydown", handleKeyup);
 
     return () => {
@@ -49,7 +50,13 @@ function Wordle() {
       <div className="max-w-[520px] h-screen w-screen mx-auto flex flex-col items-center justify-between bg-[#F9F9F9] dark:bg-[#262B3C]">
         <Header   />
         <div className="w-full flex flex-col items-center my-[50px] px-2   ">
-          {guessesArray.map((_, index) => {
+          {
+            isLoading?
+            <div className="animate-spin ">
+              Cargando<span className="">.....</span>
+            </div>:
+            <>
+            {guessesArray.map((_, index) => {
             return (
               <GuessRow
                 key={"guess" + index}
@@ -59,6 +66,10 @@ function Wordle() {
               />
             );
           })}
+            </>
+          }
+
+
         </div>
         {isDev ? (
           <>
