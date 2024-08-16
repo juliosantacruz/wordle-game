@@ -22,10 +22,8 @@ export const LogInServer = async (userData: LoginData) => {
     redirect: "follow",
   };
 
-  const response = await fetch(
-    `${baseUrl}user/api/login/`,
-    requestOptions as any
-  ).catch((error) => console.log("error", error));
+  const response = await fetch( `${baseUrl}user/api/login/`, requestOptions as any)
+  .catch((error) => console.log("error", error));
   if ((response as Response).status === 200) {
     const rawData = await (response as Response).json();
     const jwtData: any = jwtDecode(rawData.access);
@@ -33,6 +31,7 @@ export const LogInServer = async (userData: LoginData) => {
       userId: jwtData.user_id,
       email: jwtData.username,
       username: jwtData.username,
+      jwtTokens: { access: rawData.access, refresh: rawData.refresh },
     };
     return userData;
   }
@@ -50,11 +49,21 @@ type RegisterData = {
   is_admin: boolean;
 };
 
-type RegisterResponse = void | Response | { response: void | Response; login: { userId: any; email: any; username: any; } };
+type RegisterResponse =
+  | void
+  | Response
+  | {
+      response: void | Response;
+      login: { userId: any; email: any; username: any };
+    };
 
-
-export const RegisterServer = async (userData: RegisterData):Promise<RegisterResponse>  => {
-  const loginData={username:userData.username,password:userData.password}
+export const RegisterServer = async (
+  userData: RegisterData
+): Promise<RegisterResponse> => {
+  const loginData = {
+    username: userData.username,
+    password: userData.password,
+  };
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   const raw = JSON.stringify({
@@ -64,7 +73,7 @@ export const RegisterServer = async (userData: RegisterData):Promise<RegisterRes
     last_name: userData.lastname,
     email: userData.email,
     user_profile: {
-      phone: userData.phone || '234234234234',
+      phone: userData.phone || "234234234234",
       is_admin: userData.is_admin || false,
     },
   });
@@ -79,12 +88,13 @@ export const RegisterServer = async (userData: RegisterData):Promise<RegisterRes
   const response = await fetch(
     `${baseUrl}user/api/register/`,
     requestOptions as any
-  ).then((response)=>response)
-  .catch((error) => console.log("error", error));
+  )
+    .then((response) => response)
+    .catch((error) => console.log("error", error));
 
-  if((response as Response).ok){
-    const login = await LogInServer(loginData)
-    return {response, login}
+  if ((response as Response).ok) {
+    const login = await LogInServer(loginData);
+    return { response, login };
   }
 
   return response;

@@ -1,4 +1,4 @@
-import { getImageUrl } from "@/api/wordList";
+import { getImageUrl, setUserScore } from "@/api/wordList";
 import Header from "@/components/Header";
 import { RoutesDirectory } from "@/routes/RoutesDirectory";
 import { useGameStore } from "@/store/gameStore";
@@ -6,61 +6,39 @@ import { useUserStore } from "@/store/userStore";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const formatTime = (seconds: number) => {
-  const minutes = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-};
-
 export default function Score() {
+  const [score, setScore]=useState()
+  const [totalScore, setTotalScore]=useState(0)
+  const {  user } = useUserStore()
   const {
-    gamesWon,
+
     gamesPlayed,
     wordData,
     lostGame,
     winGame,
-    gameInit,
   } = useGameStore();
-  const { setStats } = useUserStore()
-
-  const leTimer = true;
-  const minutesTimer = 5;
-  const secondsTimer = 60 * minutesTimer;
-  const [timer, setTimer] = useState(secondsTimer);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const navigate = useNavigate()
 
-
   useEffect(() => {
-    let interval: string | number | NodeJS.Timeout;
-    if ((leTimer && lostGame) || (leTimer && winGame)) {
-      setIsButtonDisabled(true);
-      setTimer(5); // Reinicia el temporizador a 5 minutos
-      interval = setInterval(() => {
-        setTimer((prevTimer) => {
-          if (prevTimer > 0) {
-            return prevTimer - 1;
-          } else {
-            clearInterval(interval);
-            setIsButtonDisabled(false);
-            return 0;
-          }
-        });
-      }, 1000);
-    } else {
-      setIsButtonDisabled(false);
+    const totalScoreArr = []
+    const scoreData =async(token)=>{
+      const data = await setUserScore(token)
+      setScore(data)
+      if(data!== undefined){
+        data.map((elemento)=> totalScoreArr.push(elemento.score))
+        const value = totalScoreArr.reduce((a,b)=>a+b)
+        setTotalScore(value)
+      }
     }
+    scoreData(user.jwtTokens.access)
+  }, [user.jwtTokens.access]);
 
-    return () => clearInterval(interval);
-  }, [lostGame, winGame]);
+  console.log(totalScore, score)
+
 
   const lePlay = () => {
     navigate(RoutesDirectory.HOME)
-    setStats(false);
 
-    if (lostGame || winGame) {
-      gameInit();
-    }
   };
   return (
     <section className="flex flex-col justify-start items-center h-screen border-2 bg-[#F3F3F3] p-4 dark:bg-[#262B3C] dark:text-[#ffffff]">
@@ -75,8 +53,8 @@ export default function Score() {
           <div className="title text-[21px]">Jugadas</div>
         </div>
         <div className="stats flex flex-col items-center">
-          <div className="value text-[35px] font-extrabold">{gamesWon}</div>
-          <div className="title text-[21px]">Victorias</div>
+          <div className="value text-[35px] font-extrabold">{totalScore}</div>
+          <div className="title text-[21px]">Puntaje Total</div>
         </div>
       </div>
       {lostGame || winGame ? (
@@ -111,13 +89,9 @@ export default function Score() {
         </div>
       ) : null}
 
-      <div className="nextGame flex flex-col items-center my-4">
-        <div className="title uppercase text-[19px]">siguiente palabra</div>
-        <div className="timer font-bold text-[19px]">{formatTime(timer)}</div>
-      </div>
+
 
       <button
-        disabled={isButtonDisabled}
         onClick={lePlay}
         className="text-white bg-[#6AAA64] w-[263px] h-[50px] rounded font-extrabold text-[28px]"
       >

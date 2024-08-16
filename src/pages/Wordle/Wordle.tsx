@@ -12,28 +12,25 @@ import { useNavigate } from "react-router-dom";
 import { RoutesDirectory } from "@/routes/RoutesDirectory";
 // import ReactGA from 'react-ga4';
 
-
 function Wordle() {
   const [darkMode, setDarkMode] = useState(false);
   const { handleKeyup, fetchData } = useGameStore();
-  const { isFirstTime, stats, } = useUserStore();
+  const { isFirstTime, stats } = useUserStore();
   const isLoading = useGameStore((state) => state.isLoading);
   const currentWord = useGameStore((state) => state.word);
   const guessesArray = useGameStore((state) => state.guessArray);
   const currenGuess = useGameStore((state) => state.currentGuess);
-  const isDev = import.meta.env.VITE_IS_DEV==='true'?true:false;
-  const navigate = useNavigate()
-
-  useEffect(()=>{
-
-    if(isFirstTime){
-      navigate(RoutesDirectory.THE_RULES)
-    }
-  })
+  const isDev = import.meta.env.VITE_IS_DEV === "true" ? true : false;
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (isFirstTime) {
+      navigate(RoutesDirectory.THE_RULES);
+    }
+  });
 
-  fetchData();
+  useEffect(() => {
+    fetchData();
 
     window.addEventListener("keydown", handleKeyup);
 
@@ -43,44 +40,39 @@ function Wordle() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-
   return (
     <>
       <div className="max-w-[520px] h-screen w-screen mx-auto flex flex-col items-center justify-between bg-[#F9F9F9] dark:bg-[#262B3C]">
-        <Header   />
+        <Header />
         <div className="w-full flex flex-col items-center my-[50px] px-2   ">
-          {
-            isLoading?
+          {isLoading ? (
             <div className="animate-spin ">
               Cargando<span className="">.....</span>
-            </div>:
+            </div>
+          ) : (
             <>
-            {guessesArray.map((_, index) => {
-            return (
-              <GuessRow
-                key={"guess" + index}
-                guess={guessesArray[index]}
-                word={currentWord}
-                isGuessed={index < currenGuess}
-              />
-            );
-          })}
+              {guessesArray.map((_, index) => {
+                return (
+                  <GuessRow
+                    key={"guess" + index}
+                    guess={guessesArray[index]}
+                    word={currentWord}
+                    isGuessed={index < currenGuess}
+                  />
+                );
+              })}
             </>
-          }
-
-
+          )}
         </div>
         {isDev ? (
           <>
             <p>{currentWord}</p>
             <p>{JSON.stringify(guessesArray)}</p>
           </>
-        ): null}
+        ) : null}
 
         <Keyboard darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
-
 
       {stats ? <AsideModal children={<Stats />} openModal={stats} /> : null}
     </>
@@ -88,4 +80,3 @@ function Wordle() {
 }
 
 export default Wordle;
-

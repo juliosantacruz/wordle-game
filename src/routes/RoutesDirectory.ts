@@ -5,5 +5,6 @@ export const RoutesDirectory={
   WORDLE:'/wordle',
   THE_RULES:'/reglas',
   SCORE: '/puntaje',
+  PROFILE: '/perfil',
 
 }

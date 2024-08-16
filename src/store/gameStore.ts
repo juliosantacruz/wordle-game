@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
 import { getWordList } from "@/api/wordList";
+import {useUserStore} from '@/store/userStore'
+
 
 type WordData = {
+  id:string|number;
   word: string;
   description: string;
   url: string;
@@ -60,6 +63,7 @@ export const useGameStore = create<Store>()((set, get) => ({
     } catch (error) {
       console.error(error);
     } finally {
+      console.log(get().wordsList)
       set({ isLoading: false });
       get().gameInit();
     }
@@ -85,12 +89,14 @@ export const useGameStore = create<Store>()((set, get) => ({
     get win() {
       const isWin = get().guessArray[get().currentGuess - 1] === get().word;
       if (isWin) {
+        useUserStore.getState().setStats(true)
         set((state) => ({
           ...state,
           gamesWon: state.gamesWon + 1,
           gamesPlayed: state.gamesPlayed + 1,
           winGame: true,
-          // stats: true,
+          // FALTA AGREGAR FUNCION PARA GRABAR PUNTAJE Y PALABRA RESUELTA
+          // { wordId, score, userId}
         }));
       }
       return isWin;
@@ -101,11 +107,11 @@ export const useGameStore = create<Store>()((set, get) => ({
     get lost() {
       const isLost = get().currentGuess === 5 ? true : false;
       if (isLost) {
+        useUserStore.getState().setStats(true)
         set((state) => ({
           ...state,
           gamesPlayed: state.gamesPlayed + 1,
           lostGame: true,
-          // stats: true,
         }));
       }
       return isLost;

@@ -27,26 +27,6 @@ export default function Menu({ showMenu }: { showMenu: boolean }) {
           showMenu ? "" : "hidden"
         } flex flex-col max-w-[280px] w-8/12 bg-[#F3F3F3] dark:bg-[#262B3C]  border rounded-lg p-2 absolute z-30 top-[60px] right-4 sm:right-[140px] md:right-[30%]`}
       >
-        <Link to={RoutesDirectory.SCORE}>
-          <li className="flex pl-2 py-2 cursor-pointer hover:bg-slate-300 hover:rounded-md">
-            <img
-              src={darkMode ? darkUser : lightUser}
-              className="h-[22px]"
-              alt="Question Icon"
-            />
-            <span className="ml-2 dark:text-[white] text-[black]">Perfil</span>
-          </li>
-        </Link>
-        <Link to={RoutesDirectory.SCORE}>
-          <li className="flex pl-2 py-2 cursor-pointer hover:bg-slate-300 hover:rounded-md ">
-            <img
-              src={darkMode ? darkChart : lightChart}
-              className="h-[22px]"
-              alt="Question Icon"
-            />
-            <span className="ml-2 dark:text-[white] text-[black]">Puntaje</span>
-          </li>
-        </Link>
         <Link to={RoutesDirectory.THE_RULES}>
           <li className="flex pl-2 py-2 cursor-pointer hover:bg-slate-300 hover:rounded-md">
             <img
@@ -89,6 +69,30 @@ export default function Menu({ showMenu }: { showMenu: boolean }) {
           </>
         ) : (
           <>
+            <Link to={RoutesDirectory.PROFILE}>
+              <li className="flex pl-2 py-2 cursor-pointer hover:bg-slate-300 hover:rounded-md">
+                <img
+                  src={darkMode ? darkUser : lightUser}
+                  className="h-[22px]"
+                  alt="Question Icon"
+                />
+                <span className="ml-2 dark:text-[white] text-[black]">
+                  Perfil
+                </span>
+              </li>
+            </Link>
+            <Link to={RoutesDirectory.SCORE}>
+              <li className="flex pl-2 py-2 cursor-pointer hover:bg-slate-300 hover:rounded-md ">
+                <img
+                  src={darkMode ? darkChart : lightChart}
+                  className="h-[22px]"
+                  alt="Question Icon"
+                />
+                <span className="ml-2 dark:text-[white] text-[black]">
+                  Puntaje
+                </span>
+              </li>
+            </Link>
             <button onClick={setLogout}>
               <li className="flex pl-2 py-2 cursor-pointer hover:bg-slate-300 hover:rounded-md">
                 <img

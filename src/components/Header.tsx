@@ -9,17 +9,17 @@ import darkMenu from "@/assets/icon/menuBlack.svg";
 import lightMenu from "@/assets/icon/menuLight.svg";
 import Menu from "./Menu";
 import { useUserStore } from "@/store/userStore";
+import { RoutesDirectory } from "@/routes/RoutesDirectory";
+import { Link } from "react-router-dom";
 
-
-export default function Header( ) {
+export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
-  const { darkMode, setDarkMode} = useUserStore()
+  const { darkMode, setDarkMode } = useUserStore();
   // const { setTheRules, setStats } = useGameStore();
 
   const handleMenu = () => {
     setShowMenu(!showMenu);
   };
-
 
   useEffect(() => {
     if (darkMode) {
@@ -41,10 +41,11 @@ export default function Header( ) {
             />
           </button>
         </div>
-
-        <div className="sm:text-xl md:text-2xl lg:sm:text-4xl  font-bold  font text-[#202537] dark:text-[#DADCE0] ">
-          MEDMania
-        </div>
+        <Link to={RoutesDirectory.HOME}>
+          <div className="sm:text-xl md:text-2xl lg:sm:text-4xl  font-bold  font text-[#202537] dark:text-[#DADCE0] ">
+            MEDMania
+          </div>
+        </Link>
 
         <div className="flex justify-center  ">
           <div className="flex items-center gap-2 ">

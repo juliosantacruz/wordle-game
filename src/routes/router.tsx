@@ -8,6 +8,7 @@ import { RoutesDirectory } from "./RoutesDirectory";
 import NotFound from "@/pages/NotFound/NotFound";
 import TheRules from "@/pages/TheRules/TheRules";
 import Score from "@/pages/Score/Score";
+import Profile from "@/pages/Profile/Profile";
 
 const AppRoutes = () => {
   const routes = useRoutes([
@@ -34,6 +35,9 @@ const AppRoutes = () => {
     {
       path: RoutesDirectory.SCORE,
       element: <Score />,
+    },{
+      path: RoutesDirectory.PROFILE,
+      element: <Profile />,
     },
     { path: "/*", element: <NotFound /> },
   ]);

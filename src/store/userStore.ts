@@ -7,6 +7,7 @@ type UserData = {
   username: string;
   email: string;
   userId: string | number;
+  jwtTokens:{access:string, refresh:string}
 };
 
 type UserStore = {
@@ -50,6 +51,7 @@ export const useUserStore = create<UserStore>()(
         userId: "",
         username: "",
         email: "",
+        jwtTokens:{access:'', refresh:''}
       },
       setUser: (user: any) => set(() => ({ user: user })),
 
@@ -63,6 +65,7 @@ export const useUserStore = create<UserStore>()(
             userId: "",
             username: "",
             email: "",
+            jwtTokens:{access:'', refresh:''}
           },
           isLogin: false,
         })),
