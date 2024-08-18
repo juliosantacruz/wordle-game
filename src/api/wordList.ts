@@ -45,3 +45,22 @@ export  const setUserScore =async (jwtToken:string)=>{
 
 
 
+export  const setUserWords =async (jwtToken:string)=>{
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${jwtToken}`);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+
+  const response = await fetch(`${baseUrl}user/api/user/words`, requestOptions as any)
+  .catch((error) => console.error(error));
+  if((response as Response).status ===200)  {
+    const data = await (response as Response).json()
+
+    return data
+  }
+}
+
