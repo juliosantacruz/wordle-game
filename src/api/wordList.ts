@@ -24,7 +24,7 @@ export const getImageUrl =(image:string)=>{
 }
 
 
-export  const setUserScore =async (jwtToken:string)=>{
+export  const getUserScore =async (jwtToken:string)=>{
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${jwtToken}`);
 
@@ -43,9 +43,37 @@ export  const setUserScore =async (jwtToken:string)=>{
   }
 }
 
+type ScoreData={
+    profile: number | string, //profileId
+    word: number|string, // wordId
+    time: number, // time
+    score: number // score
+}
+
+export  const setUserScore =async (data:ScoreData, jwtToken:string)=>{
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${jwtToken}`);
+  myHeaders.append("Content-Type", "application/json");
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body:JSON.stringify(data),
+    redirect: "follow",
+  };
+
+  const response = await fetch(`${baseUrl}user/api/user/score`, requestOptions as any)
+  .catch((error) => console.error(error));
+  if((response as Response).status ===200)  {
+    const data = await (response as Response).json()
+
+    return data
+  }
+}
 
 
-export  const setUserWords =async (jwtToken:string)=>{
+
+export  const getUserWords =async (jwtToken:string)=>{
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${jwtToken}`);
 
@@ -63,4 +91,5 @@ export  const setUserWords =async (jwtToken:string)=>{
     return data
   }
 }
+
 

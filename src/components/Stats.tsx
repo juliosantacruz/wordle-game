@@ -73,7 +73,7 @@ export default function Stats() {
         <div className="nextGame flex flex-col items-center my-4 justify-center mx-8">
           <div className="title  text-[19px]">
             La palabra es:{" "}
-            <span className="uppercase font-extrabold">{wordData.word}</span>
+            <span className="uppercase font-extrabold">{wordData?.word}</span>
 
             <div className="word_data max-h-[320px] overflow-y-auto no-scrollbar">
             <p>{wordData.description}</p>
@@ -89,7 +89,7 @@ export default function Stats() {
             {wordData.url ? (
               <div className="w-full flex justify-center mt-4">
                 <a
-                  href={wordData.url}
+                  href={wordData?.url}
                   target="_blank"
                   className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-8 rounded inline-flex items-center "
                 >

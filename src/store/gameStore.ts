@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
-import { getWordList } from "@/api/wordList";
+import { getWordList, setUserScore } from "@/api/wordList";
 import {useUserStore} from '@/store/userStore'
 
 
@@ -41,14 +41,31 @@ type Store = {
   gameInit: () => void;
   fetchData: () => void;
   submitGuess: () => void;
+  setScoreServer: () => void;
 
   handleKeyup: (e: KeyboardEvent) => void;
 };
 
 export const useGameStore = create<Store>()((set, get) => ({
+  setScoreServer:async( )=>{
+    const jwtToken = useUserStore.getState().user.jwtTokens.access
+
+    try{
+      const newScore ={
+        profile: useUserStore.getState().user.profileId,
+        word: get().wordData.id,
+        time: 0,
+        score: 100
+      }
+      await setUserScore(newScore, jwtToken)
+
+    }catch (error) {
+      console.error(error);
+    }
+
+  },
   fetchData: async () => {
     set({ isLoading: true });
-    console.log(get().wordsList)
     try {
       if(get().wordsList.length===0){
         const data = await getWordList();
@@ -90,6 +107,7 @@ export const useGameStore = create<Store>()((set, get) => ({
       const isWin = get().guessArray[get().currentGuess - 1] === get().word;
       if (isWin) {
         useUserStore.getState().setStats(true)
+
         set((state) => ({
           ...state,
           gamesWon: state.gamesWon + 1,
@@ -98,6 +116,7 @@ export const useGameStore = create<Store>()((set, get) => ({
           // FALTA AGREGAR FUNCION PARA GRABAR PUNTAJE Y PALABRA RESUELTA
           // { wordId, score, userId}
         }));
+        get().setScoreServer()
       }
       return isWin;
     },

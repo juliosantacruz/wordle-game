@@ -8,7 +8,7 @@ export default function CardWordProfile({
 }) {
   const { title, img } = data || {};
   return (
-    <article className="w-36 h-40 bg-white border border-gray-400 rounded-lg shadow dark:bg-transparent dark:border-gray-700 overflow-hidden relative">
+    <article className="flex-grow w-36 h-40 bg-white border border-gray-400 rounded-lg shadow dark:bg-transparent dark:border-gray-700 overflow-hidden relative">
       <img src={StarButton} alt="star" className="absolute top-2 right-2" />
       <div className="h-32 w-full ">
         <img

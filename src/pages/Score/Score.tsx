@@ -1,4 +1,4 @@
-import { getImageUrl, setUserScore } from "@/api/wordList";
+import { getImageUrl, getUserScore } from "@/api/wordList";
 import Header from "@/components/Header";
 import { RoutesDirectory } from "@/routes/RoutesDirectory";
 import { useGameStore } from "@/store/gameStore";
@@ -11,7 +11,6 @@ export default function Score() {
   const [totalScore, setTotalScore]=useState(0)
   const {  user } = useUserStore()
   const {
-
     gamesPlayed,
     wordData,
     lostGame,
@@ -22,7 +21,7 @@ export default function Score() {
   useEffect(() => {
     const totalScoreArr = []
     const scoreData =async(token)=>{
-      const data = await setUserScore(token)
+      const data = await getUserScore(token)
       setScore(data)
       if(data!== undefined){
         data.map((elemento)=> totalScoreArr.push(elemento.score))

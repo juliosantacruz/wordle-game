@@ -30,7 +30,8 @@ export const LogInServer = async (userData: LoginData) => {
     const userData = {
       userId: jwtData.user_id,
       email: jwtData.username,
-      username: jwtData.username,
+      username: jwtData.email,
+      profileId: jwtData.profile_id,
       jwtTokens: { access: rawData.access, refresh: rawData.refresh },
     };
     return userData;

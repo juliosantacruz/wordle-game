@@ -1,4 +1,4 @@
-import { getImageUrl, setUserWords } from "@/api/wordList";
+import { getImageUrl, getUserWords } from "@/api/wordList";
 import CardWordProfile from "@/components/CardWordProfile";
 import Header from "@/components/Header";
 import { useUserStore } from "@/store/userStore";
@@ -15,7 +15,7 @@ export default function Profile() {
       const wordsArr = [];
 
       try {
-        const response = await setUserWords(token);
+        const response = await getUserWords(token);
         response.map((element) => {
           const newObject = {
             title: element.word,
@@ -37,7 +37,6 @@ export default function Profile() {
     console.log("setwords");
   }, []);
 
-  console.log(words);
 
   return (
     <section className="flex flex-col justify-start items-center h-screen border-2 bg-[#F3F3F3]  dark:bg-[#262B3C] dark:text-[#ffffff]">
@@ -54,8 +53,8 @@ export default function Profile() {
             ) : (
               <div className="flex flex-row flex-wrap gap-2 ">
                 {words.length === 0 && <p>No hay palabras</p>}
-                {words.map((word) => {
-                  return <CardWordProfile key={word.id} data={word} />;
+                {words.map((word,index) => {
+                  return <CardWordProfile key={`${word.id}-${index}`} data={word} />;
                 })}
               </div>
             )}
